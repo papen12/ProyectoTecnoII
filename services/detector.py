@@ -19,9 +19,10 @@ class TrafficSignDetector:
         self.model = load_model(model_path, device=device)
         self.confidence = confidence
         
-    def detect(self, frame: np.ndarray) -> list[Detection]:
+    def detect(self, frame: np.ndarray, conf_override: float = None) -> list[Detection]:
         """Runs predictions over a single frame and returns structured Detections list."""
-        results = self.model.predict(source=frame, conf=self.confidence, verbose=False)
+        threshold = conf_override if conf_override is not None else self.confidence
+        results = self.model.predict(source=frame, conf=threshold, verbose=False)
         
         detections = []
         if not results:

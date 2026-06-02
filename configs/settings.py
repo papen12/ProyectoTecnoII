@@ -29,17 +29,27 @@ VOICE_LANG = "es"  # Spanish voice alerts
 # Dictionary maps class IDs to Spanish descriptive names
 # Note: You should update this dictionary if your Roboflow class mappings differ!
 CLASS_NAMES = {
-    0: "Limite de velocidad 30",
-    1: "Limite de velocidad 50",
-    2: "Limite de velocidad 80",
-    3: "Pare",
-    4: "Ceda el paso",
-    5: "No entrar",
-    6: "Paso peatonal",
-    7: "Giro obligatorio a la derecha",
-    8: "Giro obligatorio a la izquierda",
-    9: "Atencion peligro",
-    # Add or update classes according to your custom dataset annotations!
+    0: "Ahead only",
+    1: "Bump",
+    2: "Car Speed 100",
+    3: "Danger",
+    4: "Go Slow",
+    5: "Lane sign",
+    6: "Left Curve",
+    7: "No Passing",
+    8: "No Stopping",
+    9: "No U Turn",
+    10: "No Waiting",
+    11: "Phone",
+    12: "Right Curve",
+    13: "Speed 100",
+    14: "Speed 30",
+    15: "Speed 50",
+    16: "Speed 80",
+    17: "Steep decent",
+    18: "Truck Speed 80",
+    19: "Tunnel",
+    20: "Work in Progress",
 }
 
 # Ensure critical folders exist

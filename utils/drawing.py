@@ -45,9 +45,9 @@ def draw_info_panel(frame: np.ndarray, info_dict: dict) -> np.ndarray:
     """Draws a premium HUD overlay in the top-left corner."""
     out_frame = frame.copy()
     
-    # Backdrop
-    cv2.rectangle(out_frame, (15, 15), (280, 110), (20, 20, 20), -1)
-    cv2.rectangle(out_frame, (15, 15), (280, 110), (255, 140, 0), 1)
+    # Backdrop - Expanded height slightly to accommodate the new status field
+    cv2.rectangle(out_frame, (15, 15), (320, 135), (20, 20, 20), -1)
+    cv2.rectangle(out_frame, (15, 15), (320, 135), (255, 140, 0), 1)
     
     y = 35
     for key, value in info_dict.items():

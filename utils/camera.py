@@ -6,8 +6,15 @@ class CameraManager:
     
     def __init__(self, source: int | str = 0, width: int = 640, height: int = 480):
         self.source = source
-        self.cap = cv2.VideoCapture(source)
         
+        # Optimize OpenCV video backend for IP streaming (use FFMPEG explicitly for network streams)
+        if isinstance(source, str) and source.startswith("http"):
+            self.cap = cv2.VideoCapture(source, cv2.CAP_FFMPEG)
+            # Minimize buffer size to decrease latency and prevent stream buildup lag
+            self.cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
+        else:
+            self.cap = cv2.VideoCapture(source)
+            
         # Configure frame dimensions
         if isinstance(source, int):
             self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, width)
