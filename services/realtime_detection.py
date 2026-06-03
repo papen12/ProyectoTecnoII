@@ -52,8 +52,8 @@ class RealtimeDetectionSystem:
                 print("⚠️ Frame acquisition failure.")
                 break
                 
-            # Perform inference (Optimized for testing with confidence threshold override of 0.25 to prevent skipping low-lit signs)
-            detections = self.detector.detect(frame, conf_override=0.25)
+            # Perform inference using the optimized confidence threshold to avoid false positives
+            detections = self.detector.detect(frame)
             self.fps_counter.tick()
             
             # Determine last detected sign dynamically for HUD
@@ -65,7 +65,7 @@ class RealtimeDetectionSystem:
             # Setup info banner details dynamically
             current_info = {
                 "Modelo": settings.MODEL_NAME,
-                "Conf": 0.25,
+                "Conf": settings.CONFIDENCE_THRESHOLD,
                 "Camara": "Camara IP" if "http" in str(self.camera_source) else self.camera_source,
                 "Voz": "Activa" if self.enable_voice else "Inactiva",
                 "Ultima": last_sign
