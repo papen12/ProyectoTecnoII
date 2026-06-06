@@ -1,31 +1,31 @@
 import os
 from pathlib import Path
 
-# Base directories
+# Directorios base
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DATASET_DIR = PROJECT_ROOT / "dataset" / "gtsdb"
 MODELS_DIR = PROJECT_ROOT / "models"
 OUTPUTS_DIR = PROJECT_ROOT / "outputs"
 
 MODEL_NAME = "yolov8s.pt"
-CONFIDENCE_THRESHOLD = 0.40  # Set to 0.40 since the model has been trained for 50 epochs
+CONFIDENCE_THRESHOLD = 0.40
 IMG_SIZE = 640
 
-# Training Parameters (when training locally)
+# Parámetros de entrenamiento
 EPOCHS = 80
-BATCH_SIZE = 8  # Safe default for local CPU/GPU limits
+BATCH_SIZE = 8
 
-# Webcam properties
+# Propiedades de la cámara web
 CAMERA_INDEX = 0
 FRAME_WIDTH = 640
 FRAME_HEIGHT = 480
 
-# Voice Alert Configuration
+# Configuración de alertas de voz
 VOICE_RATE = 150
 VOICE_COOLDOWN_SECONDS = 4
-VOICE_LANG = "es"  # Spanish voice alerts
+VOICE_LANG = "es"
 
-# Dictionary maps class IDs to Spanish descriptive names
+# Mapa de IDs de clases a nombres descriptivos en español
 CLASS_NAMES = {
     0: "Limite de velocidad (20km/h)",
     1: "Limite de velocidad (30km/h)",
@@ -73,6 +73,6 @@ CLASS_NAMES = {
 }
 
 
-# Ensure critical folders exist
+# Asegurar que existan las carpetas críticas
 for folder in [DATASET_DIR, MODELS_DIR, OUTPUTS_DIR, OUTPUTS_DIR / "training", OUTPUTS_DIR / "validation", OUTPUTS_DIR / "detections"]:
     folder.mkdir(parents=True, exist_ok=True)

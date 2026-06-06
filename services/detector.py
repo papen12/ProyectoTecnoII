@@ -13,14 +13,14 @@ class Detection:
     bbox: tuple[int, int, int, int]  # (x1, y1, x2, y2)
 
 class TrafficSignDetector:
-    """Core detection engine for custom trained YOLOv8s."""
+    """Motor de detección principal para la versión personalizada de YOLOv8s."""
     
     def __init__(self, model_path: str | Path, confidence: float = settings.CONFIDENCE_THRESHOLD, device: str = "auto"):
         self.model = load_model(model_path, device=device)
         self.confidence = confidence
         
     def detect(self, frame: np.ndarray, conf_override: float = None) -> list[Detection]:
-        """Runs predictions over a single frame and returns structured Detections list."""
+        """Ejecuta predicciones sobre un único fotograma y devuelve una lista estructurada de detecciones."""
         threshold = conf_override if conf_override is not None else self.confidence
         results = self.model.predict(source=frame, conf=threshold, verbose=False)
         
@@ -36,7 +36,7 @@ class TrafficSignDetector:
             conf = float(box.conf[0].item())
             xyxy = box.xyxy[0].cpu().numpy()
             
-            # Map name from dictionary or fallback to YOLO names
+            # Mapear el nombre desde el diccionario o usar los nombres predeterminados de YOLO
             cls_name = settings.CLASS_NAMES.get(cls_id, result.names.get(cls_id, f"Clase {cls_id}"))
             
             bbox = (int(xyxy[0]), int(xyxy[1]), int(xyxy[2]), int(xyxy[3]))

@@ -3,7 +3,7 @@ import pandas as pd
 from configs import settings
 
 def validate_dataset(dataset_dir: str | Path) -> dict:
-    """Verifies that every image has a corresponding label file in the YOLO dataset structure."""
+    """Verifica que cada imagen tenga un archivo de etiqueta correspondiente en la estructura del dataset YOLO."""
     dataset_path = Path(dataset_dir)
     results = {}
     
@@ -30,10 +30,10 @@ def validate_dataset(dataset_dir: str | Path) -> dict:
     return results
 
 def verify_yolo_format(label_file: str | Path) -> bool:
-    """Verifies that bounding boxes inside a .txt label file conform to the [class x y w h] normalizations."""
+    """Verifica que las cajas delimitadoras dentro de un archivo de etiqueta .txt cumplan con las normalizaciones [clase x y w h]."""
     file_path = Path(label_file)
     if not file_path.exists() or file_path.stat().st_size == 0:
-        # Empty text file is valid for background images in YOLO
+        # Un archivo de texto vacío es válido para imágenes de fondo en YOLO
         return True
         
     try:
@@ -52,7 +52,7 @@ def verify_yolo_format(label_file: str | Path) -> bool:
         return False
 
 def get_class_distribution(dataset_dir: str | Path) -> pd.DataFrame:
-    """Counts the occurrences of each class index across splits in the dataset."""
+    """Cuenta las ocurrencias de cada índice de clase a través de las divisiones en el dataset."""
     dataset_path = Path(dataset_dir)
     counts = []
     

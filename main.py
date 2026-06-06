@@ -32,12 +32,12 @@ def main():
     
     args = parser.parse_args()
     
-    # Parse camera index if numeric
+    # Parsear el índice de la cámara si es numérico
     source = args.source
     if isinstance(source, str) and source.isdigit():
         source = int(source)
         
-    # Update configurations dynamically
+    # Actualizar configuraciones dinámicamente
     settings.CONFIDENCE_THRESHOLD = args.conf
     
     system = RealtimeDetectionSystem(

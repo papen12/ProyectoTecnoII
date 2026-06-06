@@ -34,6 +34,7 @@ share/python-wheels/
 
 # ML models and assets
 models/*.pt
+!models/best.pt
 models/*.onnx
 models/*.engine
 dataset/

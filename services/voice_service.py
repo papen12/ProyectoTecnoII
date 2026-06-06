@@ -7,7 +7,7 @@ import sys
 from configs import settings
 
 class VoiceAlertService:
-    """Uses a background thread and a queue to emit Spanish voice notifications for traffic signs without blocking the main OpenCV frame loop."""
+    """Servicio para emitir notificaciones de voz en español sobre señales de tránsito usando un hilo en segundo plano."""
     
     def __init__(self, rate: int = settings.VOICE_RATE, cooldown_seconds: float = settings.VOICE_COOLDOWN_SECONDS, lang: str = settings.VOICE_LANG):
         self.cooldown_seconds = cooldown_seconds
@@ -17,18 +17,18 @@ class VoiceAlertService:
         self.active = True
         self.rate = rate
         
-        # Start background thread
+        # Iniciar hilo en segundo plano
         self.thread = threading.Thread(target=self._speech_worker, daemon=True)
         self.thread.start()
-        print("🔊 Threaded VoiceAlertService initialized successfully.")
+        print("Threaded VoiceAlertService inicializado correctamente.")
         
     def _speech_worker(self):
         while self.running:
             try:
-                # Retrieve voice request from queue (non-blocking with timeout to check running status)
+                # Obtener solicitud de voz de la cola
                 text = self.queue.get(timeout=0.5)
                 try:
-                    # Run pyttsx3 in a separate python process to avoid COM apartment threading issues on Windows
+                    # Ejecutar pyttsx3 en un proceso separado para evitar problemas de COM en Windows
                     cmd = [
                         sys.executable,
                         "-c",
@@ -44,27 +44,27 @@ class VoiceAlertService:
                     ]
                     subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
                 except Exception as e:
-                    print(f"⚠️ Voice system alert runtime failure: {e}")
+                    print(f"Error en la ejecución de alerta de voz: {e}")
                 finally:
                     self.queue.task_done()
             except queue.Empty:
                 continue
                 
     def is_on_cooldown(self, label: str) -> bool:
-        """Determines if a given label has been spoken too recently."""
+        """Determina si una etiqueta se ha anunciado muy recientemente."""
         now = time.time()
         last_spoken = self.last_alerts.get(label, 0.0)
         return (now - last_spoken) < self.cooldown_seconds
         
     def alert(self, label: str):
-        """Adds verbal notification to the queue if not on cooldown, clearing any old queued alerts."""
+        """Añade una notificación de voz a la cola si no está en cooldown."""
         if not self.active or self.is_on_cooldown(label):
             return
             
         text = f"Atención, señal de {label} detectada"
         self.last_alerts[label] = time.time()
         
-        # Empty the queue first so we never speak stale/old notifications
+        # Limpiar notificaciones antiguas
         while not self.queue.empty():
             try:
                 self.queue.get_nowait()
@@ -75,17 +75,15 @@ class VoiceAlertService:
         self.queue.put(text)
             
     def reset_cooldowns(self):
-        """Resets the internal timers."""
+        """Limpia los temporizadores internos."""
         self.last_alerts.clear()
         
     def shutdown(self):
-        """Safely stops any pending speech queues."""
+        """Detiene la cola de voz de manera segura."""
         self.running = False
         if self.active:
             try:
-                # We could call engine.stop() here, but since it is running in thread it is safer to let worker thread exit.
                 pass
             except Exception:
                 pass
-        print("🔌 VoiceAlertService shutdown.")
-
+        print("VoiceAlertService finalizado.")
