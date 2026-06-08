@@ -1,16 +1,12 @@
-# 🚦 Sistema de Detección de Señales de Tránsito en Tiempo Real con YOLOv8
+# Sistema de Detección de Señales de Tránsito en Tiempo Real con YOLOv8
 
 ¡Bienvenido al proyecto! Este sistema utiliza **YOLOv8s** para detectar señales de tránsito en tiempo real (mediante cámara web o archivos de video) y emite alertas de voz descriptivas en español para asistir al conductor.
 
 ---
 
-## 🛠️ Configuración Rápida (Un Solo Comando)
+## Configuración Rápida (Un Solo Comando)
 
-Hemos automatizado todo el proceso de configuración del entorno virtual, la instalación de la versión de Python correcta (v3.12) y la descarga e instalación de todas las dependencias (incluyendo PyTorch con soporte CUDA para aceleración por GPU si tu hardware lo permite).
-
-### Requisitos Previos
-* Tener **Git** instalado.
-* (Opcional) Si ya tienes **uv** instalado, el proceso será aún más rápido. Si no, nuestros scripts lo instalarán de manera automática por ti.
+Se ha automatizado todo el proceso de configuración del entorno virtual, la instalación de la versión de Python correcta (v3.12) y la descarga e instalación de todas las dependencias (incluyendo PyTorch con soporte CUDA para aceleración por GPU si el hardware lo permite).
 
 ### Instrucciones de Instalación
 
@@ -35,7 +31,7 @@ Hemos automatizado todo el proceso de configuración del entorno virtual, la ins
 
 ---
 
-## 🚀 Ejecución del Sistema
+## Ejecución del Sistema
 
 Una vez finalizada la configuración del paso anterior, puedes lanzar el sistema de detección ejecutando un único comando dentro del directorio raíz del proyecto:
 
@@ -48,32 +44,32 @@ uv run main.py
 El script `main.py` acepta múltiples parámetros para adaptar la experiencia a tus necesidades:
 
 * **Desactivar alertas por voz:**
-  Si prefieres usar la detección visual únicamente y silenciar las alertas de voz en español:
-  ```bash
-  uv run main.py --no-voice
-  ```
+   Si prefieres usar la detección visual únicamente y silenciar las alertas de voz en español:
+   ```bash
+   uv run main.py --no-voice
+   ```
 
 * **Ajustar el umbral de confianza:**
-  Por defecto es `0.40`. Puedes subirlo para evitar falsos positivos o bajarlo para detectar más señales:
-  ```bash
-  uv run main.py --conf 0.50
-  ```
+   Por defecto es `0.40`. Puedes subirlo para evitar falsos positivos o bajarlo para detectar más señales:
+   ```bash
+   uv run main.py --conf 0.50
+   ```
 
 * **Especificar una ruta de video u otra cámara:**
-  Por defecto se utiliza la webcam principal (`0`). Puedes pasar la ruta a un archivo de video o cambiar el índice de la cámara:
-  ```bash
-  uv run main.py --source "ruta/al/video.mp4"
-  ```
-  O para usar la cámara secundaria:
-  ```bash
-  uv run main.py --source 1
-  ```
+   Por defecto se utiliza la webcam principal (`0`). Puedes pasar la ruta a un archivo de video o cambiar el índice de la cámara:
+   ```bash
+   uv run main.py --source "ruta/al/video.mp4"
+   ```
+   O para usar la cámara secundaria:
+   ```bash
+   uv run main.py --source 1
+   ```
 
 * **Usar un modelo específico:**
-  Por defecto se carga el modelo entrenado ubicado en `models/best.pt` (el cual ya viene precargado en este repositorio para asegurar las mismas pruebas). Si deseas cambiar el modelo:
-  ```bash
-  uv run main.py --model "models/otro_modelo.pt"
-  ```
+   Por defecto se carga el modelo entrenado ubicado en `models/best.pt` (el cual ya viene precargado en este repositorio para asegurar las mismas pruebas). Si deseas cambiar el modelo:
+   ```bash
+   uv run main.py --model "models/otro_modelo.pt"
+   ```
 
 ---
 
@@ -93,7 +89,7 @@ El script `main.py` acepta múltiples parámetros para adaptar la experiencia a 
 
 ---
 
-## 🧪 Pruebas de Diagnóstico del Entorno
+## Pruebas de Diagnóstico del Entorno
 
 Si en cualquier momento deseas verificar que el entorno virtual y el soporte para GPU (CUDA) estén respondiendo correctamente, puedes ejecutar:
 
