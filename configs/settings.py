@@ -3,7 +3,7 @@ from pathlib import Path
 
 # Directorios base
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-DATASET_DIR = PROJECT_ROOT / "dataset" / "gtsdb"
+DATASET_DIR = PROJECT_ROOT / "dataset" / "dataset_bolivia"
 MODELS_DIR = PROJECT_ROOT / "models"
 OUTPUTS_DIR = PROJECT_ROOT / "outputs"
 
@@ -12,11 +12,11 @@ CONFIDENCE_THRESHOLD = 0.40
 IMG_SIZE = 640
 
 # Parámetros de entrenamiento
-EPOCHS = 80
+EPOCHS = 150
 BATCH_SIZE = 8
 
 # Propiedades de la cámara web
-CAMERA_INDEX = 0
+CAMERA_INDEX = "http://192.168.21.227:8080/video"
 FRAME_WIDTH = 640
 FRAME_HEIGHT = 480
 
@@ -25,51 +25,27 @@ VOICE_RATE = 150
 VOICE_COOLDOWN_SECONDS = 4
 VOICE_LANG = "es"
 
+# Corregir rotación de la cámara (rotar 90 grados a la izquierda para el modelo)
+ROTATE_INPUT_90_CCW = True
+
 # Mapa de IDs de clases a nombres descriptivos en español
 CLASS_NAMES = {
-    0: "Limite de velocidad (20km/h)",
-    1: "Limite de velocidad (30km/h)",
-    2: "Limite de velocidad (50km/h)",
-    3: "Limite de velocidad (60km/h)",
-    4: "Limite de velocidad (70km/h)",
-    5: "Limite de velocidad (80km/h)",
-    6: "Fin de limite de velocidad (80km/h)",
-    7: "Limite de velocidad (100km/h)",
-    8: "Limite de velocidad (120km/h)",
-    9: "Prohibido adelantar",
-    10: "Prohibido adelantar camiones",
-    11: "Interseccion con prioridad",
-    12: "Calzada con prioridad",
-    13: "Ceda el paso",
-    14: "Pare",
-    15: "Circulacion prohibida",
-    16: "Prohibido camiones",
-    17: "Direccion prohibida",
-    18: "Peligro",
-    19: "Curva peligrosa a la izquierda",
-    20: "Curva peligrosa a la derecha",
-    21: "Curvas peligrosas",
-    22: "Perfil irregular o rompemuelles",
-    23: "Calzada deslizante",
-    24: "Estrechamiento de calzada por la derecha",
-    25: "Obras",
-    26: "Semaforo",
-    27: "Peatones",
-    28: "Ninos o zona escolar",
-    29: "Ciclistas",
-    30: "Hielo o nieve",
-    31: "Paso de animales salvajes",
-    32: "Fin de todas las prohibiciones",
-    33: "Giro obligatorio a la derecha",
-    34: "Giro obligatorio a la izquierda",
-    35: "Siga de frente",
-    36: "Siga de frente o derecha",
-    37: "Siga de frente o izquierda",
-    38: "Pase por la derecha",
-    39: "Pase por la izquierda",
-    40: "Rotonda obligatoria",
-    41: "Fin de prohibicion de adelantar",
-    42: "Fin de prohibicion de adelantar camiones"
+    0: "Caja de Salud de Caminos a 100 metros",
+    1: "Calle de doble sentido",
+    2: "Calle de un solo sentido",
+    3: "Doble circulación",
+    4: "Giro en U permitido",
+    5: "Paso de peatones",
+    6: "Prohibido camiones",
+    7: "Prohibido estacionar, servicio rápido",
+    8: "Prohibido estacionar en toda la cuadra",
+    9: "Prohibido giro en U",
+    10: "Prohibido peatones",
+    11: "Rompemuelles a 50 metros",
+    12: "Servicio rápido Sucre",
+    13: "Solo peatones",
+    14: "Velocidad máxima 40",
+    15: "Zona escolar",
 }
 
 

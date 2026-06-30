@@ -40,7 +40,7 @@ class RealtimeDetectionSystem:
         
         # Configurar detalles del panel de información
         info = {
-            "Modelo": settings.MODEL_NAME,
+            "Modelo": self.model_path.name,
             "Conf": settings.CONFIDENCE_THRESHOLD,
             "Camara": self.camera_source,
             "Voz": "Activa" if self.enable_voice else "Inactiva"
